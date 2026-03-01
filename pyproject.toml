@@ -1,0 +1,13 @@
+[project]
+name = "frognet"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=7.2.0",
+    "opensoundscape>=0.12.1",
+    "pandas>=3.0.1",
+    "requests>=2.32.5",
+    "tqdm>=4.67.3",
+]
