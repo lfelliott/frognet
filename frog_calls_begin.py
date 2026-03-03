@@ -44,7 +44,7 @@ SPECIES_CONFIG = {
         "noise_bands": [[300, 1500], [4500, 7000]],
         "pulse_rate_range": [15, 35],
         "score_keep": 0.25,
-        "score_discard": 0.07,
+        "score_discard": 0.04,
     },
 }
 # CURRENT_SPECIES needs to be set in order to build the correct folder structure
@@ -360,6 +360,38 @@ sample = auto_kept.sample(min(10, len(auto_kept)), random_state=42)
 for _, row in sample.iterrows():
     print(f"{row['file']} (score: {row['score']:.6f})")
     display(IPAudio(filename=str(clips_dir / row["file"]), autoplay=False))
+# %%
+# review keep scores
+scores_df = pd.read_csv(BASE_DIR / "snippets" / CURRENT_SPECIES / "scores.csv")
+scores_df["reviewed"] = scores_df["reviewed"].astype(bool)
+clips_dir = BASE_DIR / "snippets" / CURRENT_SPECIES / "clips"
+spec_dir = BASE_DIR / "snippets" / CURRENT_SPECIES / "all_spectrograms"
+
+kept = scores_df[scores_df["status"] == "keep"]
+sample = kept.sample(max(1, int(len(kept) * 0.2)), random_state=42)
+total = len(sample)
+print(f"Reviewing {total} of {len(kept)} keep clips (20%)")
+
+for i, (idx, row) in enumerate(sample.iterrows(), 1):
+    clip_path = clips_dir / row["file"]
+    spec_path = spec_dir / (Path(row["file"]).stem + ".png")
+    display(IPAudio(filename=str(clip_path), autoplay=True))
+    if spec_path.exists():
+        display(IPImage(filename=str(spec_path)))
+    time.sleep(0.2)
+
+    while True:
+        decision = input(f"[{i}/{total}] {row['file']} (score: {row['score']:.6f}) | 1=keep 0=discard q=quit: ").strip().lower()
+        if decision in ("0", "1", "q"):
+            break
+
+    if decision == "q":
+        break
+    scores_df.at[idx, "status"] = "keep" if decision == "1" else "discard"
+    scores_df.at[idx, "reviewed"] = True
+
+scores_df.to_csv(BASE_DIR / "snippets" / CURRENT_SPECIES / "scores.csv", index=False)
+print("Decisions saved.")
 # %%
 # confirmed clip counts per species
 rows = []
