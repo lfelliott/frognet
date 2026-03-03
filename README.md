@@ -17,7 +17,7 @@ Then launch Jupyter and open `frog_calls_begin.py` as a notebook (e.g. via the J
 Run the cells in order for each species:
 
 1. **Setup** — configure `CURRENT_SPECIES` and create the `data/` directory structure
-2. **Load observations** — reads `data/downloads/<species>/full_calls.csv` (exported from iNaturalist using a query for RG observations of the species with sound and renamed to full_calls.csv)
+2. **Load observations** — reads `data/downloads/<species>/full_calls.csv` (exported from iNaturalist using a query for RG observations of the species with sound within Missouri, or surrounding states if Missouri doesn't have enough observation, and renamed to full_calls.csv)
 3. **Download sounds** — fetches audio files from iNaturalist observation URLs
 4. **Segment audio** — splits each recording into 3-second WAV clips
 5. **Generate spectrograms** — saves a PNG spectrogram for each clip
