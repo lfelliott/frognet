@@ -1,0 +1,1 @@
+This project was initiated to attempt to replicate the results of BirdNET, but with frogs in Missouri. We've only coded the portion to obtain calls from iNaturalist, split them into 3 second samples and manually review them for use. That code resides in frog_calls_begin.py.
