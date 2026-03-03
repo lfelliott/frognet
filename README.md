@@ -1,2 +1,3 @@
-This project was initiated to attempt to replicate the results of BirdNET, but with frogs in Missouri. We've only coded the portion to obtain calls from iNaturalist, split them into 3 second samples and manually review them for use. That code resides in frog_calls_begin.py and is set up to run in individual cells in a jupyter notebook.
+This project was initiated to attempt to replicate the results of BirdNET, but with frogs in Missouri. We've only coded the portion to obtain calls from iNaturalist, split them into 3 second samples and manually review them for use. That code resides in frog_calls_begin.py and is set up to run in individual cells in a jupyter notebook. Cells at the end are for diagnostic purposes and will go away as the project nears completion.
+
 
