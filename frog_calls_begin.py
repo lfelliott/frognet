@@ -3,17 +3,33 @@
 from pathlib import Path
 
 SPECIES_CONFIG = {
-#    "acris_blanchardi": {
-#        "trill": False,
-#        "signal_band": [2500, 4400],
-#        "noise_bands": [[1000, 2000], [4600, 6000]],
-#    },
-#    "dryophytes_chrysoscelis": {
-#        "trill": False,
-#        "signal_band": [2500, 4500],
-#        "noise_bands": [[1000, 2000], [4600, 6000]],
-#        "pulse_rate_range": [15, 35],
-#    },
+    "acris_blanchardi": {
+        "trill": False,
+        "signal_band": [2500, 4400],
+        "noise_bands": [[1000, 2000], [4600, 6000]],
+    },
+    "anaxyrus_americanus": {
+        "trill": True,
+        "signal_band": [1100, 1900],
+        "noise_bands": [[500, 1000], [2400, 6000]],
+        "pulse_rate_range": [20,40],
+        "score_keep": 0.098,
+        "score_discard": 0.025,
+    },
+    "anaxyrus_cognatus": {
+        "trill": True,
+        "signal_band": [2000, 2500],
+        "noise_bands": [[500, 1900], [2700, 6000]],
+        "pulse_rate_range": [10, 20],
+        "score_keep": 10.0,
+        "score_discard": 0.1,
+    },
+    "dryophytes_chrysoscelis": {
+        "trill": False,
+        "signal_band": [2500, 4500],
+        "noise_bands": [[1000, 2000], [4600, 6000]],
+        "pulse_rate_range": [15, 35],
+    },
     "dryophytes_versicolor": {
         "trill": False,
         "signal_band": [800, 3500],
@@ -22,21 +38,45 @@ SPECIES_CONFIG = {
         "score_keep": 0.25,
         "score_discard": 0.07,
     },
-    "pseudacris_maculata": {
-        "trill": True,
-        "signal_band": [2000, 4500],
-        "noise_bands": [[300, 1500], [5000, 7000]],
+   "lithobates_blairi": {
+        "trill": False,
+        "signal_band": [500, 3900],
+        "noise_bands": [[200, 450], [4000, 7000]],
         "pulse_rate_range": [15, 35],
-        "score_keep": 0.0001,
-        "score_discard": 0.000014,
+        "score_keep": 0.25,
+        "score_discard": 0.03,
     },
-   "pseudacris_fouquettei": {
-        "trill": True,
-        "signal_band": [2000, 4500],
-        "noise_bands": [[300, 1500], [5000, 7000]],
+    "lithobates_catesbeianus": {
+        "trill": False,
+        "signal_band": [100, 2500],
+        "noise_bands": [[0, 750], [2900, 7000]],
         "pulse_rate_range": [15, 35],
-        "score_keep": 0.0001,
-        "score_discard": 0.000014,
+        "score_keep": 0.25,
+        "score_discard": 0.03,
+    },
+   "lithobates_clamitans": {
+        "trill": False,
+        "signal_band": [500, 3900],
+        "noise_bands": [[200, 450], [4000, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.03,
+    },
+   "lithobates_palustris": {
+        "trill": False,
+        "signal_band": [600, 2500],
+        "noise_bands": [[200, 550], [3000, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.03,
+    },
+   "lithobates_sphenocephalus": {
+        "trill": False,
+        "signal_band": [800, 1700],
+        "noise_bands": [[300, 750], [1900, 5000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.03,
     },
     "pseudacris_crucifer": {
         "trill": False,
@@ -46,9 +86,33 @@ SPECIES_CONFIG = {
         "score_keep": 0.25,
         "score_discard": 0.04,
     },
-}
+   "pseudacris_fouquettei": {
+        "trill": True,
+        "signal_band": [2000, 4500],
+        "noise_bands": [[300, 1500], [5000, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.1,
+        "score_discard": 0.014,
+    },
+    "pseudacris_maculata": {
+        "trill": True,
+        "signal_band": [2000, 4500],
+        "noise_bands": [[300, 1500], [5000, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.1,
+        "score_discard": 0.014,
+    },
+    "spea_bombifrons": {
+        "trill": False,
+        "signal_band": [600, 1600],
+        "noise_bands": [[250, 550], [1700, 5000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.005,
+    },
+ }
 # CURRENT_SPECIES needs to be set in order to build the correct folder structure
-CURRENT_SPECIES = "pseudacris_crucifer"
+CURRENT_SPECIES = "lithobates_catesbeianus"
 
 BASE_DIR = Path("data")
 species = CURRENT_SPECIES
@@ -122,6 +186,7 @@ segment_audio(CURRENT_SPECIES)
 # %%
 # generate spectrograms for all clips
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 from opensoundscape.spectrogram import Spectrogram
 
 def generate_spectrograms(species):
@@ -165,6 +230,8 @@ generate_spectrograms(CURRENT_SPECIES)
 # %%
 # scoring
 import numpy as np
+from tqdm import tqdm
+from opensoundscape.audio import Audio
 from opensoundscape.ribbit import ribbit
 
 def score_clips(species):
@@ -199,7 +266,7 @@ def score_clips(species):
                 final_clip="remainder",
                 spec_clip_range=(-200, -20),
             )
-            score = float(result["score"].iloc[0]) if len(result) > 0 else 0.0
+            score = float(result["score"].iloc[0]) * 1000 if len(result) > 0 else 0.0
         else:
             amplitude = np.array(spec.net_amplitude(config["signal_band"], config["noise_bands"]))
             score = float(np.mean(amplitude))
@@ -362,6 +429,8 @@ for _, row in sample.iterrows():
     display(IPAudio(filename=str(clips_dir / row["file"]), autoplay=False))
 # %%
 # review keep scores
+import time                                                                                                                                                                         
+from IPython.display import display, Audio as IPAudio, Image as IPImage
 scores_df = pd.read_csv(BASE_DIR / "snippets" / CURRENT_SPECIES / "scores.csv")
 scores_df["reviewed"] = scores_df["reviewed"].astype(bool)
 clips_dir = BASE_DIR / "snippets" / CURRENT_SPECIES / "clips"
