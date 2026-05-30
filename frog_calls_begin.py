@@ -24,11 +24,37 @@ SPECIES_CONFIG = {
         "score_keep": 10.0,
         "score_discard": 0.1,
     },
+    "anaxyrus_fowleri": {
+        "trill": True,
+        "signal_band": [1200, 2500],
+        "noise_bands": [[500, 1000], [2700, 6000]],
+        "pulse_rate_range": [34,69],
+        "score_keep": 0.098,
+        "score_discard": 0.013,
+    },
+    "anaxyrus_woodhousii": {
+        "trill": True,
+        "signal_band": [900, 2000],
+        "noise_bands": [[200, 800], [2500, 6000]],
+        "pulse_rate_range": [37,65],
+        "score_keep": 0.098,
+        "score_discard": 0.003,
+    },
     "dryophytes_chrysoscelis": {
         "trill": False,
         "signal_band": [2500, 4500],
         "noise_bands": [[1000, 2000], [4600, 6000]],
         "pulse_rate_range": [15, 35],
+        "score_keep": 0.65,
+        "score_discard": 0.03,
+    },
+    "dryophytes_cinereus": {
+        "trill": False,
+        "signal_band": [900, 4000],
+        "noise_bands": [[100, 800], [4500, 6000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.65,
+        "score_discard": 0.07,
     },
     "dryophytes_versicolor": {
         "trill": False,
@@ -37,6 +63,30 @@ SPECIES_CONFIG = {
         "pulse_rate_range": [15, 35],
         "score_keep": 0.25,
         "score_discard": 0.07,
+    },
+    "gastrophryne_carolinensis": {
+        "trill": False,
+        "signal_band": [1000, 5000],
+        "noise_bands": [[0, 900], [5500, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.03,
+    },
+    "gastrophryne_olivacea": {
+        "trill": False,
+        "signal_band": [3500, 6500],
+        "noise_bands": [[0, 2500], [7000, 9000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.03,
+    },
+    "lithobates_areolatus": {
+        "trill": False,
+        "signal_band": [200, 2200],
+        "noise_bands": [[0, 150], [2300, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.03,
     },
    "lithobates_blairi": {
         "trill": False,
@@ -70,12 +120,28 @@ SPECIES_CONFIG = {
         "score_keep": 0.25,
         "score_discard": 0.03,
     },
+   "lithobates_pipiens": {
+        "trill": False,
+        "signal_band": [300, 3000],
+        "noise_bands": [[0, 250], [3500, 5000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.003,
+    },
    "lithobates_sphenocephalus": {
         "trill": False,
         "signal_band": [800, 1700],
         "noise_bands": [[300, 750], [1900, 5000]],
         "pulse_rate_range": [15, 35],
         "score_keep": 0.25,
+        "score_discard": 0.03,
+    },
+   "lithobates_sylvaticus": {
+        "trill": False,
+        "signal_band": [500, 4000],
+        "noise_bands": [[100, 450], [4200, 7000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.70,
         "score_discard": 0.03,
     },
     "pseudacris_crucifer": {
@@ -88,9 +154,17 @@ SPECIES_CONFIG = {
     },
    "pseudacris_fouquettei": {
         "trill": True,
-        "signal_band": [2000, 4500],
-        "noise_bands": [[300, 1500], [5000, 7000]],
-        "pulse_rate_range": [15, 35],
+        "signal_band": [2200, 4000],
+        "noise_bands": [[300, 2000], [4500, 7000]],
+        "pulse_rate_range": [10, 35],
+        "score_keep": 0.1,
+        "score_discard": 0.014,
+    },
+    "pseudacris_feriarum": {
+        "trill": True,
+        "signal_band": [2000, 4000],
+        "noise_bands": [[300, 1500], [4500, 7000]],
+        "pulse_rate_range": [10, 35],
         "score_keep": 0.1,
         "score_discard": 0.014,
     },
@@ -102,6 +176,14 @@ SPECIES_CONFIG = {
         "score_keep": 0.1,
         "score_discard": 0.014,
     },
+    "scaphiopus_holbrookii": {
+        "trill": False,
+        "signal_band": [500, 3000],
+        "noise_bands": [[250, 450], [3500, 5000]],
+        "pulse_rate_range": [15, 35],
+        "score_keep": 0.25,
+        "score_discard": 0.005,
+    },
     "spea_bombifrons": {
         "trill": False,
         "signal_band": [600, 1600],
@@ -109,10 +191,10 @@ SPECIES_CONFIG = {
         "pulse_rate_range": [15, 35],
         "score_keep": 0.25,
         "score_discard": 0.005,
-    },
+    }
  }
 # CURRENT_SPECIES needs to be set in order to build the correct folder structure
-CURRENT_SPECIES = "lithobates_catesbeianus"
+CURRENT_SPECIES = "dryophytes_chrysoscelis"
 
 BASE_DIR = Path("data")
 species = CURRENT_SPECIES
@@ -121,7 +203,6 @@ species = CURRENT_SPECIES
 (BASE_DIR / "snippets" / species / "confirmed").mkdir(parents=True, exist_ok=True)
 (BASE_DIR / "snippets" / species / "all_spectrograms").mkdir(parents=True, exist_ok=True)
 
-# %%
 # load observations
 import pandas as pd
 
@@ -166,7 +247,7 @@ CLIP_DURATION = 3.0
 def segment_audio(species):
     in_dir = BASE_DIR / "downloads" / species
     out_dir = BASE_DIR / "snippets" / species / "clips"
-    mp3_files = [f for ext in ("*.mp3", "*.m4a", "*.ogg", "*.flac", "*.wav")
+    mp3_files = [f for ext in ("*.mp3", "*.mpga", "*.m4a", "*.ogg", "*.flac", "*.wav")
                  for f in in_dir.glob(ext)]
     print(f"Found {len(mp3_files)} files to segment")
     for mp3_path in tqdm(mp3_files):
@@ -437,7 +518,7 @@ clips_dir = BASE_DIR / "snippets" / CURRENT_SPECIES / "clips"
 spec_dir = BASE_DIR / "snippets" / CURRENT_SPECIES / "all_spectrograms"
 
 kept = scores_df[scores_df["status"] == "keep"]
-sample = kept.sample(max(1, int(len(kept) * 0.2)), random_state=42)
+sample = kept.sample(max(1, int(len(kept) * 1.0)), random_state=42)
 total = len(sample)
 print(f"Reviewing {total} of {len(kept)} keep clips (20%)")
 
@@ -461,6 +542,107 @@ for i, (idx, row) in enumerate(sample.iterrows(), 1):
 
 scores_df.to_csv(BASE_DIR / "snippets" / CURRENT_SPECIES / "scores.csv", index=False)
 print("Decisions saved.")
+
+
+# %%
+# noise review — mark discarded clips across all species as frog-free or not
+import random
+import time
+import pandas as pd
+from pathlib import Path
+from IPython.display import display, Audio as IPAudio, Image as IPImage
+
+def review_noise_clips():
+    candidates = []
+    scores_dfs = {}
+
+    for species in SPECIES_CONFIG:
+        scores_path = BASE_DIR / "snippets" / species / "scores.csv"
+        if not scores_path.exists():
+            continue
+        df = pd.read_csv(scores_path)
+        df["reviewed"] = df["reviewed"].astype(bool)
+        if "noise_ok" not in df.columns:
+            df["noise_ok"] = pd.NA
+        df["noise_ok"] = df["noise_ok"].astype(object)
+        scores_dfs[species] = (scores_path, df)
+
+        mask = (df["status"] == "discard") & df["reviewed"] & df["noise_ok"].isna()
+        for idx, row in df[mask].iterrows():
+            candidates.append((species, idx, row["file"]))
+
+    random.shuffle(candidates)
+    total = len(candidates)
+    print(f"{total} discarded clips remaining to noise-review")
+
+    for i, (species, idx, fname) in enumerate(candidates, 1):
+        clips_dir = BASE_DIR / "snippets" / species / "clips"
+        spec_dir = BASE_DIR / "snippets" / species / "all_spectrograms"
+        clip_path = clips_dir / fname
+        spec_path = spec_dir / (Path(fname).stem + ".png")
+
+        print(f"\n[{i}/{total}] {species} — {fname}")
+        display(IPAudio(filename=str(clip_path), autoplay=True))
+        if spec_path.exists():
+            display(IPImage(filename=str(spec_path)))
+        time.sleep(0.2)
+
+        while True:
+            decision = input("Frog-free? 1=yes  0=no (has frogs)  q=quit: ").strip().lower()
+            if decision in ("1", "0", "q"):
+                break
+
+        if decision == "q":
+            break
+
+        scores_path, df = scores_dfs[species]
+        df.at[idx, "noise_ok"] = (decision == "1")
+        df.to_csv(scores_path, index=False)
+
+    approved = sum(
+        (df["noise_ok"] == True).sum()
+        for _, (_, df) in scores_dfs.items()
+    )
+    reviewed = sum(
+        (~df["noise_ok"].isna()).sum()
+        for _, (_, df) in scores_dfs.items()
+    )
+    print(f"\nDone. {reviewed} clips noise-reviewed so far, {approved} approved as frog-free.")
+
+review_noise_clips()
+
+# %%
+# export frog-free noise clips to birdnet training folder
+import shutil
+import pandas as pd
+from pathlib import Path
+
+def export_noise_clips():
+    noise_dir = BASE_DIR / "birdnet_training" / "noise"
+    noise_dir.mkdir(parents=True, exist_ok=True)
+
+    exported = 0
+    for species in SPECIES_CONFIG:
+        scores_path = BASE_DIR / "snippets" / species / "scores.csv"
+        if not scores_path.exists():
+            continue
+        df = pd.read_csv(scores_path)
+        if "noise_ok" not in df.columns:
+            continue
+        approved = df[df["noise_ok"] == True]
+        clips_dir = BASE_DIR / "snippets" / species / "clips"
+        for _, row in approved.iterrows():
+            src = clips_dir / row["file"]
+            dst = noise_dir / f"{species}__{row['file']}"
+            if src.exists() and not dst.exists():
+                shutil.copy2(src, dst)
+                exported += 1
+
+    total = len(list(noise_dir.glob("*.wav")))
+    print(f"Exported {exported} new clips. Noise folder total: {total}")
+
+export_noise_clips()
+
 # %%
 # confirmed clip counts per species
 rows = []
@@ -473,4 +655,153 @@ summary = pd.DataFrame(rows).set_index("species")
 total = summary["confirmed_clips"].sum()
 print(summary.to_string())
 print(f"\nTotal: {total}")
+
+# %%
+# segment extra_nonfrog WAVs into 3s clips and initialize scores.csv
+import pandas as pd
+from pathlib import Path
+from tqdm import tqdm
+from opensoundscape.audio import Audio
+
+BASE_DIR = Path("data")
+EXTRA_SRC_DIR = Path("data/extra_nonfrog")
+EXTRA_CLIPS_DIR = BASE_DIR / "snippets" / "extra_nonfrog" / "clips"
+EXTRA_SPEC_DIR = BASE_DIR / "snippets" / "extra_nonfrog" / "all_spectrograms"
+EXTRA_SCORES_PATH = BASE_DIR / "snippets" / "extra_nonfrog" / "scores.csv"
+CLIP_DURATION = 3.0
+
+EXTRA_CLIPS_DIR.mkdir(parents=True, exist_ok=True)
+EXTRA_SPEC_DIR.mkdir(parents=True, exist_ok=True)
+
+wav_files = sorted(EXTRA_SRC_DIR.glob("*.wav"))
+print(f"Found {len(wav_files)} source files")
+
+for wav_path in wav_files:
+    stem = wav_path.stem
+    audio = Audio.from_file(wav_path)
+    offset = 0.0
+    while offset + CLIP_DURATION <= audio.duration:
+        out_path = EXTRA_CLIPS_DIR / f"{stem}_{int(offset)}s.wav"
+        if not out_path.exists():
+            audio.trim(offset, offset + CLIP_DURATION).save(out_path)
+        offset += CLIP_DURATION
+
+all_clips = sorted(f.name for f in EXTRA_CLIPS_DIR.glob("*.wav"))
+print(f"{len(all_clips)} total clips")
+
+existing_files = set()
+if EXTRA_SCORES_PATH.exists():
+    existing_df = pd.read_csv(EXTRA_SCORES_PATH)
+    existing_files = set(existing_df["file"])
+else:
+    existing_df = pd.DataFrame(columns=["file", "noise_ok"])
+
+new_rows = [{"file": f, "noise_ok": pd.NA} for f in all_clips if f not in existing_files]
+if new_rows:
+    pd.concat([existing_df, pd.DataFrame(new_rows)], ignore_index=True).to_csv(EXTRA_SCORES_PATH, index=False)
+    print(f"Added {len(new_rows)} rows to scores.csv")
+else:
+    print("scores.csv already up to date")
+
+# %%
+# generate spectrograms for extra_nonfrog clips
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+from pathlib import Path
+from opensoundscape.audio import Audio
+from opensoundscape.spectrogram import Spectrogram
+
+EXTRA_CLIPS_DIR = Path("data/snippets/extra_nonfrog/clips")
+EXTRA_SPEC_DIR = Path("data/snippets/extra_nonfrog/all_spectrograms")
+
+clips = sorted(EXTRA_CLIPS_DIR.glob("*.wav"))
+print(f"Generating spectrograms for {len(clips)} clips")
+
+for clip_path in tqdm(clips):
+    out_path = EXTRA_SPEC_DIR / (clip_path.stem + ".png")
+    if out_path.exists():
+        continue
+    audio = Audio.from_file(clip_path)
+    spec = Spectrogram.from_audio(audio)
+    fig, ax = plt.subplots(figsize=(6, 3))
+    ax.imshow(
+        spec.spectrogram,
+        aspect="auto",
+        origin="lower",
+        extent=[spec.times[0], spec.times[-1], spec.frequencies[0], spec.frequencies[-1]],
+        cmap="inferno",
+    )
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Frequency (Hz)")
+    ax.set_title(clip_path.stem)
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=100)
+    plt.close(fig)
+
+print("Done.")
+
+# %%
+# review extra_nonfrog clips for noise training
+import time
+import pandas as pd
+from pathlib import Path
+from IPython.display import display, Audio as IPAudio, Image as IPImage
+
+EXTRA_CLIPS_DIR = Path("data/snippets/extra_nonfrog/clips")
+EXTRA_SPEC_DIR = Path("data/snippets/extra_nonfrog/all_spectrograms")
+EXTRA_SCORES_PATH = Path("data/snippets/extra_nonfrog/scores.csv")
+
+df = pd.read_csv(EXTRA_SCORES_PATH)
+df["noise_ok"] = df["noise_ok"].astype(object)
+pending = df[df["noise_ok"].isna()]
+total = len(pending)
+print(f"{total} clips to review")
+
+for i, (idx, row) in enumerate(pending.iterrows(), 1):
+    clip_path = EXTRA_CLIPS_DIR / row["file"]
+    spec_path = EXTRA_SPEC_DIR / (Path(row["file"]).stem + ".png")
+
+    print(f"\n[{i}/{total}] {row['file']}")
+    display(IPAudio(filename=str(clip_path), autoplay=True))
+    if spec_path.exists():
+        display(IPImage(filename=str(spec_path)))
+    time.sleep(0.2)
+
+    while True:
+        decision = input("Add to noise? 1=yes  0=no  q=quit: ").strip().lower()
+        if decision in ("1", "0", "q"):
+            break
+
+    if decision == "q":
+        break
+
+    df.at[idx, "noise_ok"] = (decision == "1")
+    df.to_csv(EXTRA_SCORES_PATH, index=False)
+
+approved = (df["noise_ok"] == True).sum()
+reviewed = (~df["noise_ok"].isna()).sum()
+print(f"\nDone. {reviewed} reviewed, {approved} approved for noise training.")
+
+# %%
+# export approved extra_nonfrog clips to birdnet training noise folder
+import shutil
+import pandas as pd
+from pathlib import Path
+
+EXTRA_CLIPS_DIR = Path("data/snippets/extra_nonfrog/clips")
+EXTRA_SCORES_PATH = Path("data/snippets/extra_nonfrog/scores.csv")
+NOISE_DIR = Path("data/birdnet_training/noise")
+NOISE_DIR.mkdir(parents=True, exist_ok=True)
+
+df = pd.read_csv(EXTRA_SCORES_PATH)
+exported = 0
+for _, row in df[df["noise_ok"] == True].iterrows():
+    src = EXTRA_CLIPS_DIR / row["file"]
+    dst = NOISE_DIR / f"extra_nonfrog__{row['file']}"
+    if src.exists() and not dst.exists():
+        shutil.copy2(src, dst)
+        exported += 1
+
+total = len(list(NOISE_DIR.glob("*.wav")))
+print(f"Exported {exported} new clips. Noise folder total: {total}")
 # %%
