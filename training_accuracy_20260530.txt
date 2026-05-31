@@ -1,0 +1,26 @@
+uv add birdnet_analyzer
+
+  .venv/bin/birdnet-train data/birdnet_training/ \
+    --output data/frog_classifier \
+    --model_save_mode replace \
+    --hidden_units 256 --dropout 0.2 \
+    --mixup --label_smoothing \
+    --upsampling_ratio 0.8 --upsampling_mode repeat \
+    --fmin 100 --fmax 7000 \
+    --epochs 75 --val_split 0.2
+
+Training completed successfully. Final metrics at epoch 75/75:
+
+  - AUPRC: 0.950 — precision-recall area under curve (1.0 is perfect)
+  - AUROC: 0.993 — discrimination ability across thresholds, very strong
+  - Loss: 0.586
+
+  AUROC of 0.993 is excellent. AUPRC of 0.950 is solid given the class imbalance. The model is in data/frog_classifier/. Ready to test it on some recordings?
+
+  Run inference using
+  .venv/bin/birdnet-analyze "data/field_recordings/Lithobates sphenocephalus-BOONMO-3MWetlands-20260403-LFE.wav" \
+     -c data/frog_classifier.tflite \
+     -o data/field_recordings/ \
+     --fmin 100 --fmax 7000 \
+     --rtype csv \
+     --min_conf 0.25
