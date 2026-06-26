@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FOLDER="${1:-data/field_recordings/the_ridges}"
+
+cd "$(dirname "$0")"
+
+.venv/bin/birdnet-analyze "$FOLDER" \
+  -o "$FOLDER" \
+  -c data/frog_classifier.tflite \
+  --rtype csv \
+  --combine_results \
+  --fmin 100 \
+  --fmax 7000 \
+  --overlap 0.0 \
+  --min_conf 0.1 \
+  --lat -1 \
+  --lon -1

@@ -1,0 +1,28 @@
+confirmed_clips
+species
+acris_blanchardi                       303
+anaxyrus_americanus                    552
+anaxyrus_cognatus                      117
+anaxyrus_fowleri                       383
+anaxyrus_woodhousii                    168
+dryophytes_chrysoscelis                286
+dryophytes_cinereus                    203
+dryophytes_versicolor                  636
+gastrophryne_carolinensis              245
+gastrophryne_olivacea                  841
+lithobates_areolatus                   210
+lithobates_blairi                      140
+lithobates_catesbeianus                326
+lithobates_clamitans                   286
+lithobates_palustris                   148
+lithobates_pipiens                     193
+lithobates_sphenocephalus              583
+lithobates_sylvaticus                  986
+pseudacris_crucifer                    848
+pseudacris_fouquettei                  893
+pseudacris_feriarum                   1419
+pseudacris_maculata                    603
+scaphiopus_holbrookii                  215
+spea_bombifrons                         67
+
+Total: 10651
