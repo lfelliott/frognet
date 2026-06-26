@@ -9,8 +9,12 @@ wheels/
 # Virtual environments
 .venv
 
-# Data
-data/
+# Data (ignore contents but allow specific classifier files to be tracked)
+data/*
+!data/frog_classifier.tflite
+!data/frog_classifier_Labels.txt
+!data/frog_classifier_Params.csv
+!data/frog_classifier_sample_counts.csv
 
 # Claude memory
 memory/
